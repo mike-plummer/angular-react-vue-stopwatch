@@ -1,0 +1,13 @@
+.stopwatches {
+    display: flex;
+    flex: auto;
+    flex-direction: row;
+
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+.stopwatch {
+    display: flex;
+    flex: auto;
+}

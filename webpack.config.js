@@ -1,5 +1,7 @@
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+const webpack = require('webpack');
 
 module.exports = options => {
   return {
@@ -61,7 +63,14 @@ module.exports = options => {
       new HtmlWebpackPlugin({
         title: 'Angular, React, Vue Stopwatches',
         template: 'src/index.html',
-      })
+      }),
+      new HtmlWebpackIncludeAssetsPlugin({
+        assets: ['src/styles.css'],
+        append: false
+      }),
+      new webpack.ContextReplacementPlugin(
+        /angular([\\\/])core(\\|\/)@angular/
+      )
     ]
   }
 };
