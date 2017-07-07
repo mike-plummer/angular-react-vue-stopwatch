@@ -1,9 +1,10 @@
 <template>
   <div>
-    <p>{{ time | number }}</p>
+    <h2>{{ time | number }}</h2>
     <button v-on:click="start" v-bind:disabled="isRunning">Start</button>
     <button v-on:click="stop" v-bind:disabled="!isRunning">Stop</button>
     <button v-on:click="reset">Reset</button>
+    <p v-if="elapsedTime + time > 0">Total elapsed time: {{ elapsedTime + time | number }}</p>
   </div>
 </template>
 
@@ -16,6 +17,7 @@ let subscription = null;
 
 const state = {
   time: 0.0,
+  elapsedTime: 0.0,
   isRunning: false
 };
 
@@ -38,6 +40,7 @@ const stop = () => {
 
 const reset = () => {
   stop();
+  state.elapsedTime += state.time;
   state.time = 0.0;
 };
 

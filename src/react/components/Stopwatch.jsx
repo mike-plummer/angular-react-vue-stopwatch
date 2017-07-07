@@ -17,10 +17,11 @@ export class Stopwatch extends React.Component {
 
   render() {
     return <div>
-      <p>{ this.state.time.toFixed(2) }</p>
+      <h2>{ this.state.time.toFixed(2) }</h2>
       <button onClick={this.start.bind(this)} disabled={this.state.active}>Start</button>
       <button onClick={this.stop.bind(this)} disabled={!this.state.active}>Stop</button>
       <button onClick={this.reset.bind(this)}>Reset</button>
+      { this.state.elapsedTime + this.state.time > 0 && ( <p>Total elapsed time: { (this.state.elapsedTime + this.state.time).toFixed(2) }</p> ) }
     </div>
   }
 
@@ -41,11 +42,13 @@ export class Stopwatch extends React.Component {
 
   reset() {
     this.stop();
+    this.state.elapsedTime += this.state.time;
     this.setTime(0.0);
   }
 
   setTime(time) {
     this.setState({
+      elapsedTime: this.elapsedTime,
       time
     });
   }
@@ -54,5 +57,9 @@ export class Stopwatch extends React.Component {
     this.setState({
       active
     });
+  }
+
+  get elapsedTime() {
+    return this.state ? this.state.elapsedTime : 0.0;
   }
 }

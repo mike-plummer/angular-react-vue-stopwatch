@@ -11,6 +11,7 @@ import { Constants } from '../../../common';
 export class StopwatchComponent implements OnDestroy {
 
   time: number = 0.0;
+  elapsedTime: number = 0.0;
   private subscription: Subscription;
 
   get isRunning(): boolean {
@@ -38,6 +39,7 @@ export class StopwatchComponent implements OnDestroy {
     if (this.isRunning) {
       this.stop();
     }
+    this.elapsedTime += this.time;
     this.time = 0.0;
   }
 
