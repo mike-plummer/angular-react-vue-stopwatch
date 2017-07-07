@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <h1>Vue</h1>
     <stopwatch></stopwatch>
   </div>
 </template>
@@ -14,9 +15,3 @@ export default {
   }
 }
 </script>
-
-<style>
-#app {
-
-}
-</style>

@@ -1,6 +1,6 @@
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import './polyfills';
 
-import { StopwatchModule } from './components/stopwatch/stopwatch.module';
+import { ApphModule } from './app.module';
 
-platformBrowserDynamic().bootstrapModule(StopwatchModule);
+platformBrowserDynamic().bootstrapModule(ApphModule);
