@@ -2,4 +2,7 @@
 <button (click)="start()" [disabled]="isRunning">Start</button>
 <button (click)="stop()" [disabled]="!isRunning">Stop</button>
 <button (click)="reset()">Reset</button>
-<p *ngIf="elapsedTime + time > 0">Total elapsed time: {{ elapsedTime + time | number:'1.2-2' }}</p>
+<p *ngIf="previousTime + time > 0">Total elapsed time: {{ previousTime + time | number:'1.2-2' }}</p>
+<ol>
+    <li *ngFor="let time of previousTimes">{{ time | number:'1.2-2' }}</li>
+</ol>

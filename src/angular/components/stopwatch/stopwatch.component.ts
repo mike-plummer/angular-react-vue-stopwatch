@@ -11,11 +11,15 @@ import { Constants } from '../../../common';
 export class StopwatchComponent implements OnDestroy {
 
   time: number = 0.0;
-  elapsedTime: number = 0.0;
+  previousTimes: number[] = [];
   private subscription: Subscription;
 
   get isRunning(): boolean {
     return Boolean(this.subscription);
+  }
+
+  get previousTime(): number {
+    return this.previousTimes.reduce((prev, cur) => prev + cur, 0);
   }
 
   start(): void {
@@ -39,7 +43,7 @@ export class StopwatchComponent implements OnDestroy {
     if (this.isRunning) {
       this.stop();
     }
-    this.elapsedTime += this.time;
+    this.previousTimes.push(this.time);
     this.time = 0.0;
   }
 

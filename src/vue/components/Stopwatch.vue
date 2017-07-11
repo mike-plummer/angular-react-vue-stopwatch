@@ -4,7 +4,12 @@
     <button v-on:click="start" v-bind:disabled="isRunning">Start</button>
     <button v-on:click="stop" v-bind:disabled="!isRunning">Stop</button>
     <button v-on:click="reset">Reset</button>
-    <p v-if="elapsedTime + time > 0">Total elapsed time: {{ elapsedTime + time | number }}</p>
+    <p v-if="previousTime + time > 0">Total elapsed time: {{ previousTime + time | number }}</p>
+    <ol>
+      <li v-for="time in previousTimes">
+        {{ time | number }}
+      </li>
+    </ol>
   </div>
 </template>
 
@@ -17,7 +22,7 @@ let subscription = null;
 
 const state = {
   time: 0.0,
-  elapsedTime: 0.0,
+  previousTimes: [],
   isRunning: false
 };
 
@@ -40,7 +45,7 @@ const stop = () => {
 
 const reset = () => {
   stop();
-  state.elapsedTime += state.time;
+  state.previousTimes.push(state.time);
   state.time = 0.0;
 };
 
@@ -48,6 +53,11 @@ export default {
   name: 'stopwatch',
   data() {
     return state;
+  },
+  computed: {
+    previousTime: () => {
+      return state.previousTimes.reduce((prev, cur) => prev + cur, 0);
+    }
   },
   filters: {
     number: value => {

@@ -12,16 +12,26 @@ export class Stopwatch extends React.Component {
   }
 
   componentWillMount() {
-    this.setTime(0.0);
+    this.setState({
+      time: 0.0,
+      previousTimes: [],
+      active: false
+    });
   }
 
   render() {
+    const previousTime = this.state.previousTimes.reduce((prev, cur) => prev + cur, 0);
+
     return <div>
       <h2>{ this.state.time.toFixed(2) }</h2>
       <button onClick={this.start.bind(this)} disabled={this.state.active}>Start</button>
       <button onClick={this.stop.bind(this)} disabled={!this.state.active}>Stop</button>
       <button onClick={this.reset.bind(this)}>Reset</button>
-      { this.state.elapsedTime + this.state.time > 0 && ( <p>Total elapsed time: { (this.state.elapsedTime + this.state.time).toFixed(2) }</p> ) }
+      { previousTime + this.state.time > 0 && ( <p>Total elapsed time: { (previousTime + this.state.time).toFixed(2) }</p> ) }
+
+      <ol>
+      { this.state.previousTimes.map((time, index) => <li key={index}>{time.toFixed(2)}</li>) }
+      </ol>
     </div>
   }
 
@@ -42,13 +52,20 @@ export class Stopwatch extends React.Component {
 
   reset() {
     this.stop();
-    this.state.elapsedTime += this.state.time;
+    this.addPreviousTime(this.state.time);
     this.setTime(0.0);
+  }
+
+  addPreviousTime(prevTime) {
+    this.state.previousTimes.push(prevTime);
+
+    this.setState({
+      previousTimes: this.state.previousTimes
+    });
   }
 
   setTime(time) {
     this.setState({
-      elapsedTime: this.elapsedTime,
       time
     });
   }
@@ -57,9 +74,5 @@ export class Stopwatch extends React.Component {
     this.setState({
       active
     });
-  }
-
-  get elapsedTime() {
-    return this.state ? this.state.elapsedTime : 0.0;
   }
 }
