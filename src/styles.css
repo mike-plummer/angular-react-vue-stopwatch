@@ -3,11 +3,27 @@
     flex: auto;
     flex-direction: row;
 
+    padding: 30px;
+
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     text-align: center;
 }
 
 .stopwatch {
-    display: flex;
-    flex: auto;
+    flex-grow: 1;
+    border-radius: 5px;
+    justify-content: center;
+    margin: 10px;
+}
+
+#angular {
+    background-color: lightskyblue;
+}
+
+#react {
+    background-color: lightgoldenrodyellow;
+}
+
+#vue {
+    background-color: lightsalmon;
 }

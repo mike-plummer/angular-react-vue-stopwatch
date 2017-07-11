@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="vue" class="stopwatch">
     <h1>Vue</h1>
     <stopwatch></stopwatch>
   </div>
