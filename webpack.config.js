@@ -59,6 +59,11 @@ module.exports = options => {
       ]
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify('production')
+        }
+      }),
       new FriendlyErrorsPlugin(),
       new HtmlWebpackPlugin({
         title: 'Angular, React, Vue Stopwatches',
@@ -70,7 +75,24 @@ module.exports = options => {
       }),
       new webpack.ContextReplacementPlugin(
         /angular([\\\/])core(\\|\/)@angular/
-      )
-    ]
+      ),
+      new webpack.optimize.UglifyJsPlugin({
+        mangle: true,
+        comments: false,
+        sourceMap: false,
+        compress: {
+          screw_ie8: true,
+          warnings: false
+        }
+      })
+    ],
+    devServer: {
+      port: 8000,
+      host: 'localhost',
+      compress: true,
+      quiet: true,
+      inline: false,
+      historyApiFallback: true
+    }
   }
 };
