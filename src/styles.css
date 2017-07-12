@@ -1,11 +1,12 @@
+body {
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+    padding: 0 30px;
+}
+
 .stopwatches {
     display: flex;
     flex: auto;
     flex-direction: row;
-
-    padding: 30px;
-
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
     text-align: center;
 }
 
